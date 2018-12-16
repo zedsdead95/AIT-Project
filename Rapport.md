@@ -2,8 +2,6 @@
 ## Laboratoire n°3 : 
 
 > Auteurs : Loic Frueh - Koubaa Walid	
-> Enseignant : Graph Marcel   
-> Assistants : Bastien	
 > Date : 15.12.2018  
 
 ### Objectives
