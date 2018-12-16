@@ -57,7 +57,7 @@ Nous obtenons en lancant sur postant un requete sur l'adresse http://192.168.42.
 
 2. A correct usage of the load balancer should not be based on a round robin configuration but redirect the request according to servers charge with the appropriate cookie to keep the session.
 
-3. Diagram explainig what happens when we execute a request and then resfreshes the page.
+3. Diagram explaining what happens when we execute a request and then resfreshes the page.
 
 	![alt](img/diag1.png) 
 
@@ -72,6 +72,8 @@ Nous obtenons en lancant sur postant un requete sur l'adresse http://192.168.42.
 	![alt](img/11.png) 
 	
 	Since the s2 server is no longer available, the round robin will not be changing on each new request. So instead of changing from s1 to s2 it will remain on the unique server available: s1.
+	
+	Here is an example of diagramm with cookie session with NODESSID:
 	
 	![alt](img/diag2.png) 
 
