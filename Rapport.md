@@ -91,7 +91,7 @@ Nous obtenons en lancant sur postant un requete sur l'adresse http://192.168.42.
 
 2. The only modifications made were to add the following lines to the haproxy.cfg file .
 
-	![alt](img/9.png) 
+	![alt](img/pic.png) 
 
 	Let's analyse those new parameters:
 	
