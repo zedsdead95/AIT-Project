@@ -295,13 +295,20 @@ The HAProxy will create a new session for this client and save his id and his se
 
 	![alt](img/20.png)
 
-	We can now see that requests are redirected onto servers based on their weight.
-	Here, s2 receive a third of all requests and s1 receives two thirds of all requests.
-	As forthe delay, it remains and adds a slight delay for the response.
 
 	In general it seems that this procedure is useful for servers that have a big delay -> the slow server gets a low weight and the speed one gets a bigger weight.
 
-	![alt](img/22.png)
+	Without cookies:
+
+	![alt](img/part4/weighted_jmeter_without.png)
+
+	With cookies:
+
+	![alt](img/part4/weighted_jmeter_with.png)
+
+
+	We can now see that requests are redirected onto servers based on their weight.
+	Here, s2 receive a third of all requests and s1 receives two thirds of all requests.
 
 6. To clean the cookie on each request, we either specify this option on Jmeter or do it manually on each request directly on the browser.
 
