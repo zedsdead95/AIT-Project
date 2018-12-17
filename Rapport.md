@@ -63,7 +63,7 @@ Nous obtenons en lancant sur postant un requete sur l'adresse http://192.168.42.
 
 4. Jmeter screenshot
 
-	![alt](img/12.png)
+	![alt](img/part1/roundrobin_nosticky_jmeter.png)
 
 5. Then we execute the command
 
