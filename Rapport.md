@@ -250,7 +250,7 @@ The HAProxy will create a new session for this client and save his id and his se
 
 	Here is the result:
 
-	![alt](img/19.png)
+	![alt](img/part4/delais0_jmeter.png)
 
 2. First we need to be sure that the **delay is equal to 250 ms** for the s1 server.
 
@@ -260,7 +260,7 @@ The HAProxy will create a new session for this client and save his id and his se
 
 	We can see that requests to s1 server are clearly slower. 	The troughout is slower since the delay is bigger.
 
-	![alt](img/22.png)
+	![alt](img/part4/delais250_jmeter.png)
 
 	It is now pretty slow for s1 server to have a response.
 
