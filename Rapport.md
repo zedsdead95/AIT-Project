@@ -314,7 +314,6 @@ The HAProxy will create a new session for this client and save his id and his se
 
 	We already saw the benefits to use a cookie (see up).
 Without a cookie, we can see that each request is now considered as a new request and therefore needs a new session. Since s1 has now a delay, for many new sessions requested, s1 will soon be over-demanded by these concurrent thread requests and s2 will take on the new ones to come.
-
 We see that the general throughput is higher without cookies than with cookies.
 
 ## Task 5
