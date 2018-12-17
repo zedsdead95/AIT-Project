@@ -144,7 +144,7 @@ The HAProxy will create a new session for this client and save his id and his se
 
 ##Task 3
 
-	- Step 4 base screenshot:
+	Step 4 base screenshot:
 		![alt](img/part3/step4.png)
 
 	### Questions
