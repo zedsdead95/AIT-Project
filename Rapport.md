@@ -126,17 +126,17 @@ The HAProxy will create a new session for this client and save his id and his se
 
 	Before insertion
 
-	![alt](img/12.png)
+	![alt](img/part1/roundrobin_nosticky_jmeter.png)
 
 	After insertion
 
-	![alt](img/17.png)
+	![alt](img/part2/stickysession_jmeter.png)
 
 	Just by analysing these new reports, we can see that the response is slightly faster and therefore the usage/utility of a cookie is there: **a faster throughput**
 
 6. Lets analyse now the last Jmeter summary report
 
-	![alt](img/17.png)
+	![alt](img/part2/stickysession_jmeter.png)
 
     So, in this new exeution, the laod-balancer "balances" requests between the two servers. The main difference with the previous execution is that requests will always reach the same server. If a thread A (on server 1) does all his request before thread B (on server 2), server 1 will receive all the requests and server 2 none. After that, when thread B will be executing, it will be the opposite (none for server 1). We can say that an equilibrium will occur between servers.
 
