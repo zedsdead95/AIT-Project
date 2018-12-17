@@ -171,7 +171,9 @@ Step 4 base screenshot:
 3. I have refresh my browser and this is what i have received :
 	![alt](img/part3/question3.png)
 
-	We can see that i stay on the s1 node with one more session view than in the base screenshot of the step 4. This is easily understandable. The DRAIN mode redirect all NEW traffic to the other active nodes. However all CURRENT sessions with the node in DRAIN mode continue to communicate with it. So NEW traffic => other nodes but CURRENT or IN PLACE traffic => keep their previous nodes.
+	We can see that i stay on the s1 node with one more session view than in the base screenshot of the step 4. This is easily understandable.
+	The DRAIN mode redirect all NEW traffic to the other active nodes. However all CURRENT sessions with the node in DRAIN mode continue to communicate with it.
+	So NEW traffic => other nodes but CURRENT or IN PLACE traffic => keep their previous nodes.
 
 	We "freeze" the load of the node with this mode. No new connections are allowed but it keeps the previous one.
 
