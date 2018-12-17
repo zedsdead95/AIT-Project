@@ -166,9 +166,10 @@ Step 4 base screenshot:
 
 	![alt](img/part3/question2.png)
 
-	We can see, in the nodes section, that the line for the s1 node is now blue instead of green, like in the previous screenshot. This indicate us that this node is now in DRAIN mode.
+	We can see, in the nodes section, that the line for the s1 node is now blue instead of green, like in the previous screenshot.
+	This indicate us that this node is now in DRAIN mode.
 
-3. I have refresh my browser and this is what i have received :
+3. I have refresh my browser and this is what i have received:
 	![alt](img/part3/question3.png)
 
 	We can see that i stay on the s1 node with one more session view than in the base screenshot of the step 4. This is easily understandable.
@@ -193,12 +194,14 @@ Step 4 base screenshot:
 	a. When I refresh my first browser (the one in step 4)
 		![alt](img/part3/question6_2.png)
 
-		We can see that I stay in connection with the s1 node (the node that was in DRAIN mode) but it's normal because this reset don't break previous session connections. So i don't loose my previous connections
+		We can see that I stay in connection with the s1 node (the node that was in DRAIN mode) but it's normal because this reset don't break previous session connections.
+		So i don't loose my previous connections
 
 	b. When I refresh my second browser
 		![alt](img/part3/question6_3.png)
 
-		I stay connected with the s2 node (we can see that with the session view counter which is higher and the id which is the same than before) for the same reason than above. As the connections aren't reset I keep the same session than before (with s2 in this case).
+		I stay connected with the s2 node (we can see that with the session view counter which is higher and the id which is the same than before) for the same reason than above.
+		As the connections aren't reset I keep the same session than before (with s2 in this case).
 
 	c. When I clear my second browser's cookies and refresh multiple time
 		![alt](img/part3/question6_4.png)
@@ -218,7 +221,10 @@ Step 4 base screenshot:
 	a. When I refresh my first browser (the one in step 4)
 		![alt](img/part3/question7.png)
 
-		This is interesting because we notice that I have now a new session with the s2 node (the one still in READY mode). This switching is because the MAINT mode redirect ALL traffic (current ones and new ones) to the other active nodes. In our case, s1 is now in MAINT mode so it is no more reachable. All traffic will be redirected to s2 because it is the only active node left.
+		This is interesting because we notice that I have now a new session with the s2 node (the one still in READY mode).
+		This switching is because the MAINT mode redirect ALL traffic (current ones and new ones) to the other active nodes.
+		In our case, s1 is now in MAINT mode so it is no more reachable.
+		All traffic will be redirected to s2 because it is the only active node left.
 
 	b. When I refresh my second browser
 		![alt](img/part3/question7_2.png)
@@ -229,7 +235,8 @@ Step 4 base screenshot:
 	c. When I clear my second browser's cookies and refresh multiple time
 		![alt](img/part3/question7_3.png)
 
-		I m still redirected to the s2 node (with a new session every time) but still in connection with the s2 node. As s1 is in MAINT mode i can't reach it even with new traffic.
+		I m still redirected to the s2 node (with a new session every time) but still in connection with the s2 node.
+		As s1 is in MAINT mode i can't reach it even with new traffic.
 		When a node is in MAINT mode, new and current traffic can't reach it anymore. It is the same as if it was down.
 
 	Finally this is the screenshot of the HAProxy state page:
@@ -283,7 +290,8 @@ Step 4 base screenshot:
 4.	Well after many many trials to be redirected to the s1 server,with a delay of 2500 ms for the s1 server i have always been redirected to the s2 server !
 	####The s1 server doesn't appear at all !
 
-	With a delay of 2500 ms, HAProxy appears to ignore the s1 server. The delay is too long so th HAProxy redirects all the request to s2. In fact, the s1 server seems to be down.
+	With a delay of 2500 ms, HAProxy appears to ignore the s1 server. The delay is too long so th HAProxy redirects all the request to s2.
+	In fact, the s1 server seems to be down.
 
 	![alt](img/25.png)
 
@@ -297,7 +305,9 @@ Step 4 base screenshot:
 
 	![alt](img/20.png)
 
-	We can now see that requests are redirected onto servers based on their weight. Here, s2 receive a third of all requests and s1 receives two thirds of all requests. As forthe delay, it remains and adds a slight delay for the response.
+	We can now see that requests are redirected onto servers based on their weight.
+	Here, s2 receive a third of all requests and s1 receives two thirds of all requests.
+	As forthe delay, it remains and adds a slight delay for the response.
 
 	In general it seems that this procedure is useful for servers that have a big delay -> the slow server gets a low weight and the speed one gets a bigger weight.
 
@@ -320,9 +330,14 @@ Without a cookie, we can see that each request is now considered as a new reques
 			- the maximum number of connection allowed for a server (maxconn)
 			- the number of active servers
 
-		 First of all, you HAVE TO set a maxconn value otherwise it's an non-sense. Without a maxconn value this strategy is useless and only the first server (with the lowest id) will receive the connections. When you have set a maxconn value (maybe 20) if the first server reaches 20 connections, the next connection will be made with the second server, and so on once the maximum number of connections (20) in the second server is reached.
+		 First of all, you HAVE TO set a maxconn value otherwise it's an non-sense.
+		 Without a maxconn value this strategy is useless and only the first server (with the lowest id) will receive the connections.
+		 When you have set a maxconn value (maybe 20) if the first server reaches 20 connections, the next connection will be made with the second server, and so on once the maximum number of connections (20) in the second server is reached.
 
-		 This strategy allow you to modulate the number of active server in function of the traffic. If there is few connections you can power off the servers with the highest ids. In the same way, you can power on more servers at the rush hours. This algorithm allows you to always use the smallest number of servers.
+		 This strategy allow you to modulate the number of active server in function of the traffic.
+		 If there is few connections you can power off the servers with the highest ids.
+		 In the same way, you can power on more servers at the rush hours.
+		 This algorithm allows you to always use the smallest number of servers.
 
 		 In order to use this algorithm efficiently, you'd better use a cloud controller to check the server usage and power off the unused ones and turn on new server when the back-end queue is growing.
 
@@ -331,7 +346,9 @@ Without a cookie, we can see that each request is now considered as a new reques
 			- Once a server reach its maxconn value, the next server is used
 			- It allow you to modulate your number of active server according to the traffic intensity
 
-	b. Leastconn: This strategy is pretty simple, the server with the lowest number of connection receives the next connection. This is the opposite of the previous algorithm. In this case we dispatch the load equally between all servers. If servers have the same number of connections (the lowest number of connection), a round-robin is perform to choose which one will be used for the upcoming connection.
+	b. Leastconn: This strategy is pretty simple, the server with the lowest number of connection receives the next connection.
+	This is the opposite of the previous algorithm. In this case we dispatch the load equally between all servers.
+	If servers have the same number of connections (the lowest number of connection), a round-robin is perform to choose which one will be used for the upcoming connection.
 
 		 So in a nutshell:
 		 - The server with the lowest number of connections is used.
@@ -351,7 +368,8 @@ Without a cookie, we can see that each request is now considered as a new reques
 		b. We have made a choice. We kept the request number constant (100) and we have played with the number of users:
 			![alt](img/part5/question2_1_first[24user].png)
 
-			We have played like this until we reach a switching point that forced the use of s2. We have seen that with 100 requests per user we can have 24 users requesting and still have only one server working (s1) like in the screenshot above.
+			We have played like this until we reach a switching point that forced the use of s2.
+			We have seen that with 100 requests per user we can have 24 users requesting and still have only one server working (s1) like in the screenshot above.
 
 		c. But we have made a test with 25 users:
 			![alt](img/part5/question2_1_first[25user].png)
@@ -359,7 +377,9 @@ Without a cookie, we can see that each request is now considered as a new reques
 			We see that for 25 users making 100 requests each we forced the use of the second server (s2).
 			We can see clearly that the first server is more used than the second one and it's logical with this kind of strategy.
 
-		d. In conclusion for these test we could say that if we know that there will be less that 25 user making 100 requests we can power off the s2 server. This is more economic and ecological according to the electric consumption. This kind of choice is the purpose of this strategy => modulate the number of active server according to what number we really need.
+		d. In conclusion for these test we could say that if we know that there will be less that 25 user making 100 requests we can power off the s2 server.
+		This is more economic and ecological according to the electric consumption.
+		This kind of choice is the purpose of this strategy => modulate the number of active server according to what number we really need.
 
 		Note: These test are done with unreal values but it is just for playing and put things in perspective.
 
@@ -380,7 +400,9 @@ Without a cookie, we can see that each request is now considered as a new reques
 		![alt](img/part5/question2_1_least.png)
 
 		We see that the load is equally dispatch between the two node (s1 and s2).
-		However this result is very close of a round-robin with sticky session result. This is certainly due to the fact that the leastconn strategy show the best of its capacities with long very long sessions and we are in HTTP so very short sessions. Maybe with an other protocol we can test a little bit further than that. Maybe with a test where we could see the repartition in action (live).
+		However this result is very close of a round-robin with sticky session result.
+		This is certainly due to the fact that the leastconn strategy show the best of its capacities with long very long sessions and we are in HTTP so very short sessions.
+	 	Maybe with an other protocol we can test a little bit further than that. Maybe with a test where we could see the repartition in action (live).
 
 	We have try to see if this proximity with the round-robin result is still true with no sticky session so we have done an other configuration without cookies enabled:
 	![alt](img/part5/question2_least[without].png)
@@ -391,7 +413,10 @@ Without a cookie, we can see that each request is now considered as a new reques
 	And this result is the same than with the one round-robin algorithm without sticky session.
 
 
-3. We don't think there is an algorithm that is absolutely better than the other between these two. It all depends on the situation. If you have long sessions maybe the leastconn is the best choice for you. If you have monitored the traffic and you know precisely when it's a rush hour and when it's dead calm or you have automatic tools which could switch on and off your server according to the back-end queue business, maybe you should go to the "first" algorithm solution. It will save you energy and money.
+3. We don't think there is an algorithm that is absolutely better than the other between these two. It all depends on the situation.
+If you have long sessions maybe the leastconn is the best choice for you.
+If you have monitored the traffic and you know precisely when it's a rush hour and when it's dead calm or you have automatic tools which could switch on and off your server according to the back-end queue business, maybe you should go to the "first" algorithm solution.
+It will save you energy and money.
 
 Personally, we both think that the leastconn solution isn't very well suited for this lab as there is only very short sessions.
 So if we had to choose between these two solutions, we would choose the "first" algorithm solution. It fits better with the HTTP protocol than the leastconn.
