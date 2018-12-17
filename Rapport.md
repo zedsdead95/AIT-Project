@@ -149,91 +149,91 @@ Step 4 base screenshot:
 
 ### Questions
 
-	1. Here is the screenshots for Step 5:
-		![alt](img/part3/question1.png)
+1. Here is the screenshots for Step 5:
+	![alt](img/part3/question1.png)
 
-		This is the command line tool socat which is connecting with the HAProxy.
+	This is the command line tool socat which is connecting with the HAProxy.
 
-		![alt](img/part3/question1_2.png)
+	![alt](img/part3/question1_2.png)
 
-		This is the screenshot of the HAProxy state page
+	This is the screenshot of the HAProxy state page
 
-	2. Here is the command for setting the node s1 in DRAIN mode:
+2. Here is the command for setting the node s1 in DRAIN mode:
 
-		![alt](img/part3/question2_2.png)
+	![alt](img/part3/question2_2.png)
 
-		Here is the screenshot of the HAProxy state page after my command above:
+	Here is the screenshot of the HAProxy state page after my command above:
 
-		![alt](img/part3/question2.png)
+	![alt](img/part3/question2.png)
 
-		We can see, in the nodes section, that the line for the s1 node is now blue instead of green, like in the previous screenshot. This indicate us that this node is now in DRAIN mode.
+	We can see, in the nodes section, that the line for the s1 node is now blue instead of green, like in the previous screenshot. This indicate us that this node is now in DRAIN mode.
 
-	3. I have refresh my browser and this is what i have received :
-		![alt](img/part3/question3.png)
+3. I have refresh my browser and this is what i have received :
+	![alt](img/part3/question3.png)
 
-		We can see that i stay on the s1 node with one more session view than in the base screenshot of the step 4. This is easily understandable. The DRAIN mode redirect all NEW traffic to the other active nodes. However all CURRENT sessions with the node in DRAIN mode continue to communicate with it. So NEW traffic => other nodes but CURRENT or IN PLACE traffic => keep their previous nodes.
+	We can see that i stay on the s1 node with one more session view than in the base screenshot of the step 4. This is easily understandable. The DRAIN mode redirect all NEW traffic to the other active nodes. However all CURRENT sessions with the node in DRAIN mode continue to communicate with it. So NEW traffic => other nodes but CURRENT or IN PLACE traffic => keep their previous nodes.
 
-		We "freeze" the load of the node with this mode. No new connections are allowed but it keeps the previous one.
+	We "freeze" the load of the node with this mode. No new connections are allowed but it keeps the previous one.
 
-	4. We are automatically directed on the s2 node. It's logic because s1 is in DRAIN mode and we are trying to make a new connection so we can't reach it.
+4. We are automatically directed on the s2 node. It's logic because s1 is in DRAIN mode and we are trying to make a new connection so we can't reach it.
 
-	5. I have clear my new browser's cookies and refresh multiple time and this is what I receive all the time:
+5. I have clear my new browser's cookies and refresh multiple time and this is what I receive all the time:
 
-		![alt](img/part3/question5.png)
+	![alt](img/part3/question5.png)
 
-		Once again it's perfectly logic. We can't reach the node in DRAIN mode (s1) with new traffic.
+	Once again it's perfectly logic. We can't reach the node in DRAIN mode (s1) with new traffic.
 
-	6. Now I reset the node s1 in READY mode with this command:
-		![alt](img/part3/question6_1.png)
+6. Now I reset the node s1 in READY mode with this command:
+	![alt](img/part3/question6_1.png)
 
-		And that's what I obtain:
+	And that's what I obtain:
 
-		a. When I refresh my first browser (the one in step 4)
-			![alt](img/part3/question6_2.png)
+	a. When I refresh my first browser (the one in step 4)
+		![alt](img/part3/question6_2.png)
 
-			We can see that I stay in connection with the s1 node (the node that was in DRAIN mode) but it's normal because this reset don't break previous session connections. So i don't loose my previous connections
+		We can see that I stay in connection with the s1 node (the node that was in DRAIN mode) but it's normal because this reset don't break previous session connections. So i don't loose my previous connections
 
-		b. When I refresh my second browser
-			![alt](img/part3/question6_3.png)
+	b. When I refresh my second browser
+		![alt](img/part3/question6_3.png)
 
-			I stay connected with the s2 node (we can see that with the session view counter which is higher and the id which is the same than before) for the same reason than above. As the connections aren't reset I keep the same session than before (with s2 in this case).
+		I stay connected with the s2 node (we can see that with the session view counter which is higher and the id which is the same than before) for the same reason than above. As the connections aren't reset I keep the same session than before (with s2 in this case).
 
-		c. When I clear my second browser's cookies and refresh multiple time
-			![alt](img/part3/question6_4.png)
+	c. When I clear my second browser's cookies and refresh multiple time
+		![alt](img/part3/question6_4.png)
 
-			This time I finally switch to the s1 node. This is the correct behavior. I'm no more in DRAIN mode so s1 is now candidate again for new traffic.
+		This time I finally switch to the s1 node. This is the correct behavior. I'm no more in DRAIN mode so s1 is now candidate again for new traffic.
 
-		Finally this is the screenshot of the HAProxy state page:
-		![alt](img/part3/question6.png)
+	Finally this is the screenshot of the HAProxy state page:
+	![alt](img/part3/question6.png)
 
-		We can see, in the nodes section, that the line for the s1 node is now green again (READY mode) instead of dark blue (DRAIN mode).
+	We can see, in the nodes section, that the line for the s1 node is now green again (READY mode) instead of dark blue (DRAIN mode).
 
-	7. Now I set the node s1 in MAINT mode with this command:
-		![alt](img/part3/question7_1.png)
+7. Now I set the node s1 in MAINT mode with this command:
+	![alt](img/part3/question7_1.png)
 
-		And that's what I obtain:
+	And that's what I obtain:
 
-		a. When I refresh my first browser (the one in step 4)
-			![alt](img/part3/question7.png)
+	a. When I refresh my first browser (the one in step 4)
+		![alt](img/part3/question7.png)
 
-			This is interesting because we notice that I have now a new session with the s2 node (the one still in READY mode). This switching is because the MAINT mode redirect ALL traffic (current ones and new ones) to the other active nodes. In our case, s1 is now in MAINT mode so it is no more reachable. All traffic will be redirected to s2 because it is the only active node left.
+		This is interesting because we notice that I have now a new session with the s2 node (the one still in READY mode). This switching is because the MAINT mode redirect ALL traffic (current ones and new ones) to the other active nodes. In our case, s1 is now in MAINT mode so it is no more reachable. All traffic will be redirected to s2 because it is the only active node left.
 
-		b. When I refresh my second browser
-			![alt](img/part3/question7_2.png)
+	b. When I refresh my second browser
+		![alt](img/part3/question7_2.png)
 
-			As said before, I'm now redirected to the s2 node because the s1 node is in MAINT mode so unreachable for the moment.
-			Before this I was in connection with the s1 node and now I switch to the s2 node with a brand new session.
+		As said before, I'm now redirected to the s2 node because the s1 node is in MAINT mode so unreachable for the moment.
+		Before this I was in connection with the s1 node and now I switch to the s2 node with a brand new session.
 
-		c. When I clear my second browser's cookies and refresh multiple time
-			![alt](img/part3/question7_3.png)
+	c. When I clear my second browser's cookies and refresh multiple time
+		![alt](img/part3/question7_3.png)
 
-			I m still redirected to the s2 node (with a new session every time) but still in connection with the s2 node. As s1 is in MAINT mode i can't reach it even with new traffic.
-			When a node is in MAINT mode, new and current traffic can't reach it anymore. It is the same as if it was down.
+		I m still redirected to the s2 node (with a new session every time) but still in connection with the s2 node. As s1 is in MAINT mode i can't reach it even with new traffic.
+		When a node is in MAINT mode, new and current traffic can't reach it anymore. It is the same as if it was down.
 
-		Finally this is the screenshot of the HAProxy state page:
-		![alt](img/part3/question7_4.png)
+	Finally this is the screenshot of the HAProxy state page:
+	![alt](img/part3/question7_4.png)
 
-		We can see, in the nodes section, that the line for the s1 node is now brown (MAINT mode) instead of green (DRAIN mode) like in the previous screenshot.
+	We can see, in the nodes section, that the line for the s1 node is now brown (MAINT mode) instead of green (DRAIN mode) like in the previous screenshot.
 
 
 
