@@ -69,7 +69,7 @@ Nous obtenons en lancant sur postant un requete sur l'adresse http://192.168.42.
 
 		docker stop s2
 
-	![alt](img/11.png)
+	![alt](img/part1/roundrobin_nosticky_alone_jmeter.png)
 
 	Since the s2 server is no longer available, the round robin will not be changing on each new request. So instead of changing from s1 to s2 it will remain on the unique server available: s1.
 
