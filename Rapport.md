@@ -275,7 +275,7 @@ The HAProxy will create a new session for this client and save his id and his se
 
 	Here is the Jmeter report with only s2 server.
 
-	![alt](img/24.png)
+	![alt](img/part4/delais2500_jmeter.png)
 
 4.	Well after many many trials to be redirected to the s1 server,with a delay of 2500 ms for the s1 server i have always been redirected to the s2 server !
 	####The s1 server doesn't appear at all !
